@@ -1,6 +1,6 @@
 import java.util.*;
 import java.io.*;
-public class Piece implements Serializable{
+public abstract class Piece implements Serializable{
 	/** Les coordonées de la pièce */
 	private int x,y;
 	/** le caractère correspondant à la pièce */
@@ -9,7 +9,7 @@ public class Piece implements Serializable{
 	private ArrayList<Carre> liste;
 	private String nomFichier;
 	
-	public void LireFichier() throws IOException{
+	public void lireFichier() throws IOException{
 		BufferedReader br = new BufferedReader(new FileReader(this.nomFichier));
 		String ligne = br.readLine();
 		char carre;
@@ -30,17 +30,20 @@ public class Piece implements Serializable{
 	
 	
 	public boolean superpose(Piece p){
-		boolean res=false;
 		Carre c1;
 		for(int i=0;i<this.liste.size();i++){
 			c1=(Carre)this.liste.get(i);
 			for(int j=0;j<p.liste.size();j++){
-				if(c1.equals(p.liste.get(j))){
-					res=true;
+				if(((c1.getX()+this.x)==(p.x+p.liste.get(i).getX()))&&((c1.getY()+this.y)==(p.y+p.liste.get(i).getY()))){
+					return true;
 				}
 			}
 		}
-		return res;
+		return false;
+	}
+
+	public boolean memeOrigine(Piece p){
+		return (this.x==p.x) && (this.y==p.y);
 	}
 	
 	
@@ -56,6 +59,13 @@ public class Piece implements Serializable{
 		this.x=nx;
 		this.y=ny;
 	}
+	public void setId(char nid){
+		this.id=nid;
+	}
+	public void setNomFichier(String nnom){
+		this.nomFichier=nnom;
+	}
+
 	public int getX(){
 		return this.x;
 	}
@@ -65,7 +75,7 @@ public class Piece implements Serializable{
 	public char getId(){
 		return this.id;
 	}
-	public ArrayList getListe(){
+	public ArrayList<Carre> getListe(){
 		return this.liste;
 	}
 }
