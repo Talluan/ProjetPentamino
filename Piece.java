@@ -28,6 +28,24 @@ public abstract class Piece implements Serializable{
 		
 	}
 	
+    
+    public boolean similaire(Piece p) {
+        if (this.liste.size() != p.liste.size()) {
+            return false;
+        }
+        for (Carre carre : liste) {
+            boolean jum = false;
+            for (Carre carre2 : p.liste) {
+                if (carre.getX() == carre2.getX() && carre.getY() == carre2.getY()) {
+                    jum = true;
+                }
+            }
+            if (!jum) {
+                return false;
+            }
+        }
+        return true;
+    }
 	
 	public boolean superpose(Piece p){
 		Carre c1;
