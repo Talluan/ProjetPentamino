@@ -64,7 +64,9 @@ public abstract class Piece implements Serializable{
 		return (this.x==p.x) && (this.y==p.y);
 	}
 	
-	
+    
+
+
 	
 	
 	public void setX(int nx){
