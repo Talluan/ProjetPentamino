@@ -10,15 +10,17 @@ public abstract class Joueur implements Serializable{
         
     }
 
-    public boolean poserPiece(Partie partie,Piece piece){
+    public boolean poserPiece(Piece piece){
         try{
-            partie.poserPiece(piece);
+            this.liste.get(Jeu.numeroPartie).poserPiece(piece);
         }catch (Exception e){//le type de l'exeption va changer là c'est si les pices se superposent
-            partie.retirerDernierePiece();
+            this.liste.get(Jeu.numeroPartie).retirerDernierePiece();
             System.out.println("Les pieces se superposent");
         }
         
     }
+
+    public abstract double calculerScore();
 
     
 }
