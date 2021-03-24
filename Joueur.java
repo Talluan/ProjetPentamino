@@ -3,7 +3,7 @@ import java.io.*;
 public abstract class Joueur implements Serializable{
     private String nom;
     private double scoreMoyen;
-    private ArrayList<int> liste;
+    private ArrayList<Partie> liste;
 
 
     public static Joueur chargerJoueur(String nom){
