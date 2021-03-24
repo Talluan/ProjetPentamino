@@ -9,12 +9,12 @@ public class Partie implements Serializable{
     /**
      * Hauteur de la grille
      */
-    public final static int hauteur;
+    public final static int hauteur = 10;
 
     /**
      * Largeur de la grille
      */
-    public final static int largeur;
+    public final static int largeur = 10;
 
 
     /**
@@ -38,7 +38,8 @@ public class Partie implements Serializable{
      * Constructeur,  A FINIR !!!!!!
      */
     public Partie() {
-        this.grille = new char [Partie.largeur][Partie.largeur];
+
+        this.grille = new char [Partie.largeur][Partie.hauteur];
         this.piaPosees = listePieceAlea(5); // Nombre de pièces pourrait dépendre d'une variable joueur static dans jeu
         this.piPosees = new ArrayList<Piece>();
     }
@@ -100,14 +101,14 @@ public class Partie implements Serializable{
 
     }
 
-    public boolean pieceSuperposee(Piece p) [
+    public boolean pieceSuperposee(Piece p) {
         for (Piece p2 : this.piPosees) {
             if (p.superpose(p2)) {
                 return true;
             }
         }
         return false;
-    ]
+    }
 
 
     public void ajouterPiece(Piece p, int x, int y) throws CaseDejaRemplieException, PieceDebordeException {
