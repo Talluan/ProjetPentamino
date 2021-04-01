@@ -36,7 +36,7 @@ public class Partie implements Serializable{
 
 
     /**
-     * Constructeur,  A FINIR !!!!!!
+     * Constructeur
      */
     public Partie() {
 
@@ -46,6 +46,10 @@ public class Partie implements Serializable{
         this.piPosees = new ArrayList<Piece>();
     }
 
+
+    /**
+     * méthode chargée de remplir la grille d'une partie
+     */
     public void remplirGrille() {
         for (int i = 0; i < Partie.largeur; i++) {
             for (int j = 0; j < Partie.hauteur; j++) {
@@ -54,7 +58,11 @@ public class Partie implements Serializable{
         }
     }
 
-
+    /**
+     * méthode qui retourne une liste de pièce aléatoire
+     * @param taille nombre de pièce que l'on veut dans notre liste
+     * @return la liste de pièce
+     */
     public ArrayList<Piece> listePieceAlea(int taille) {
         ArrayList<Piece> tab = new ArrayList<Piece>();
         for (int i = 0; i < taille; i++) {
@@ -77,6 +85,14 @@ public class Partie implements Serializable{
         return tab;
     }
 
+
+    /**
+     * méthode qui indique si une pièce déborde ou non
+     * @param p piece que l'on souhaite poser
+     * @param x position en largeur de la pièce
+     * @param y position en hauteur de la pièce
+     * @return un booleen indiquant si la pièce dépasse de la grille
+     */
     public boolean debordeGrille(Piece p, int x, int y) {
         ArrayList<Carre> lCarre = p.getListe();
 
@@ -110,6 +126,12 @@ public class Partie implements Serializable{
 
     }
 
+
+    /**
+     * méthode qui indique si un pièce est superposée à une autre
+     * @param p pièce que l'on souhaite vérifier
+     * @return un booléen indiquant si la pièce est superposée
+     */
     public boolean pieceSuperposee(Piece p) {
         for (Piece p2 : this.piPosees) {
             if (p.superpose(p2)) {
@@ -119,7 +141,14 @@ public class Partie implements Serializable{
         return false;
     }
 
-
+    /**
+     * méthode qui ajoute une pièce à la grille de jeu
+     * @param p pièce que l'on souhaite ajouter
+     * @param x position hozizontale
+     * @param y position verticale
+     * @throws CaseDejaRemplieException
+     * @throws PieceDebordeException
+     */
     public void ajouterPiece(Piece p, int x, int y) throws CaseDejaRemplieException, PieceDebordeException {
 
         try {
@@ -148,6 +177,10 @@ public class Partie implements Serializable{
         }
     }
 
+    /**
+     * méthode qui permet de retirer la dernière pièce de la grille de jeu
+     * et la remet dans les pièces à poser
+     */
     public void retirerDernierePiece() {
         // On récupère la place de la dernière pièce ajoutée
         int place = this.piPosees.size() - 1; 
@@ -168,7 +201,20 @@ public class Partie implements Serializable{
 
     }
     
+    /**
+     * méthode qui affiche la liste des pièces à poser
+     */
+    public void affichageListePiece() {
+        for (int i = 0; i < this.piaPosees.size(); i++) {
+            System.out.println("piece " + i + 1 + " :" );
 
+        }
+    }
+
+    /**
+     * méthode qui indique le nombre de pièces posées
+     * @return un double indiquant combien de pièces sont posées
+     */
     public double nbPiPosees() {
         return (double) this.piPosees.size();
     }
