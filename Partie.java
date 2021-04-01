@@ -207,9 +207,21 @@ public class Partie implements Serializable{
     public void affichageListePiece() {
         for (int i = 0; i < this.piaPosees.size(); i++) {
             System.out.println("piece " + i + 1 + " :" );
-
+            this.piaPosees[i].afficherPiece();
         }
     }
+
+
+
+    public void afficherGrille() {
+        for (int i = 0; i < Partie.largeur; i++) {
+            for (int j = 0; j < Partie.hauteur; j++) {
+                System.out.println(this.grille[i][j]);
+            }
+        }
+    }
+
+
 
     /**
      * méthode qui indique le nombre de pièces posées
