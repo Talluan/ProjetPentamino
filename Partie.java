@@ -66,7 +66,7 @@ public class Partie implements Serializable{
     public ArrayList<Piece> listePieceAlea(int taille) {
         ArrayList<Piece> tab = new ArrayList<Piece>();
         for (int i = 0; i < taille; i++) {
-            int nbAlea = (int) Math.random()*4;
+            int nbAlea = (int) Math.random()*10;
             switch (nbAlea) {
                 case 0:
                     tab.add(new C(0, 0));
@@ -76,6 +76,24 @@ public class Partie implements Serializable{
                     break;
                 case 2:
                     tab.add(new T(0, 0));
+                    break;
+                case 3:
+                    tab.add(new I(0, 0));
+                    break;
+                case 4:
+                    tab.add(new P(0, 0));
+                    break;
+                case 5:
+                    tab.add(new Q(0, 0));
+                    break;
+                case 6:
+                    tab.add(new S(0, 0));
+                    break;
+                case 7:
+                    tab.add(new X(0, 0));
+                    break;
+                case 8:
+                    tab.add(new Z(0, 0));
                     break;
                 default:
                     tab.add(new U(0, 0));
