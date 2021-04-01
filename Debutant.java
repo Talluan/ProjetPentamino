@@ -6,7 +6,7 @@ public class Debutant extends Joueur implements Serializable{
     }
 
     public double calculerScore(){
-        return this.getListe().get(Jeu.numeroPartie).nbPiPosees();
+        return ((Partie)(this.getListe().get(Jeu.numeroPartie))).nbPiPosees();
     }
 
 }
