@@ -1,26 +1,62 @@
 import java.util.*;
 import java.io.*;
-public abstract class Joueur implements Serializable{
+
+public abstract class Joueur implements Serializable {
     private String nom;
     private double scoreMoyen;
     private ArrayList<Partie> liste;
 
 
-    public static Joueur chargerJoueur(String nom){
+    // public static Joueur chargerJoueur(String nom) {
         
+    // }
+
+    public Joueur(String nom) {
+        this.nom = nom;
+        this.scoreMoyen = 0;
+        this.liste = new ArrayList<Partie>();
     }
 
-    public boolean poserPiece(Piece piece){
-        try{
-            this.liste.get(Jeu.numeroPartie).poserPiece(piece);
-        }catch (Exception e){//le type de l'exeption va changer là c'est si les pices se superposent
+    public boolean poserPiece(Piece piece) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Ou voulez vous placer la piece ?");
+        int x = sc.nextInt();
+        int y = sc.nextInt();
+        try {
+            this.liste.get(Jeu.numeroPartie).ajouterPiece(piece, x, y);
+        } catch (CaseDejaRemplieException e) { // le type de l'exeption va changer là c'est si les pièces se superposent
             this.liste.get(Jeu.numeroPartie).retirerDernierePiece();
-            System.out.println("Les pieces se superposent");
+            System.out.println("Les pieces se superposent !");
+            return false;
+        } catch (PieceDebordeException e) {
+            this.liste.get(Jeu.numeroPartie).retirerDernierePiece();
+            System.out.println("La piece sort de la grille !");
+            return false;
         }
+        return true;
         
     }
 
     public abstract double calculerScore();
 
+    public void setNom(String name) {
+        this.nom = name;
+    }
+
+    public String getNom() {
+        return this.nom;
+    }
+
+    public void setScore(double sc) {
+        this.scoreMoyen = sc;
+    }
+
+    public double getScore() {
+        return this.scoreMoyen;
+    }
+
+    public ArrayList getListe() {
+        return this.liste;
+    }
     
 }
