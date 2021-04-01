@@ -8,6 +8,11 @@ public abstract class Piece implements Serializable{
 	/** la liste de carré d'une pièce */
 	private ArrayList<Carre> liste;
 	private String nomFichier;
+
+	public Piece(int x,int y){
+        this.setX(x);
+        this.setY(y);
+    }
 	
 	public void lireFichier() throws IOException{
 		BufferedReader br = new BufferedReader(new FileReader(this.nomFichier));
