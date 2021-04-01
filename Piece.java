@@ -1,25 +1,67 @@
 import java.util.*;
 import java.io.*;
 public abstract class Piece implements Serializable{
-	/** Les coordonées de la pièce */
+
+	/** 
+     * Les coordonées de la pièce 
+     */
 	private int x,y;
-	/** le caractère correspondant à la pièce */
+
+	/** 
+     * le caractère correspondant à la pièce 
+     */
 	private char id;
-	/** la liste de carré d'une pièce */
+
+	/** 
+     * la liste de carré d'une pièce 
+     * */
 	private ArrayList<Carre> liste;
+
+    /**
+     * nom du fichier
+     */
 	private String nomFichier;
 
+    /**
+     * hauteur de la pièce
+     */
+    private int hauteur;
+
+    /**
+     * largeur de la pièce
+     */
+    private int largeur;
+
+
+    /**
+     * Constructeur de pièce
+     * @param x position horizontale
+     * @param y position verticale
+     */
 	public Piece(int x,int y){
         this.setX(x);
         this.setY(y);
     }
 	
+
+    /**
+     * méthode qui lit un fichier stockant une pièce
+     * @throws IOException 
+     */
 	public void lireFichier() throws IOException{
 		BufferedReader br = new BufferedReader(new FileReader(this.nomFichier));
 		String ligne = br.readLine();
 		char carre;
-		int hauteur=0;
+		int haut=0;
+        int larg=0;
 		while(ligne!=null){
+
+            // on récupère la largeur de la ligne si elle est plus grande que celle stockée
+            if (larg < ligne.length()) {
+                larg = ligne.length();
+            }
+
+            // si le caractère correspond à un # dans le fichier, ajoute un carre aux coordonnées
 			for(int i=0;i<ligne.length();i++){
 				carre=ligne.charAt(i);
 				if(carre=='#'){
@@ -30,7 +72,9 @@ public abstract class Piece implements Serializable{
 			hauteur++;
 			ligne=br.readLine();
 		}
-		
+
+        this.largeur = larg;
+        this.hauteur = haut;
 	}
 	
     
@@ -70,7 +114,33 @@ public abstract class Piece implements Serializable{
 	}
 	
     
+    public void afficherPiece() {
+        char[][] tab = new char[this.largeur][this.hauteur];
 
+        // remplit un tableau avec des # ou des .
+        for (int i = 0; i < tab.length; i++) {
+            for (int j = 0; j < tab[i].length; j++) {
+                boolean trouve = false;
+                for (Carre carre : this.liste) {
+                    if(carre.getX() == i && carre.getY() == j) {
+                        tab[i][j] = '#';
+                        trouve = true;
+                        break;
+                    }
+                }
+                if (!trouve) {
+                    tab[i][j] = '.';
+                }
+            }
+        }
+
+        // affiche le tableau rempli
+        for (int i = 0; i < tab.length; i++) {
+            for (int j = 0; j < tab[i].length; j++) {
+                System.out.println(tab[i][j]);
+            }
+        }
+    }
 
 	
 	
