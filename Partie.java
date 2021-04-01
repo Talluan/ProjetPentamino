@@ -1,5 +1,6 @@
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.math.*;
 
 public class Partie implements Serializable{
@@ -40,8 +41,17 @@ public class Partie implements Serializable{
     public Partie() {
 
         this.grille = new char [Partie.largeur][Partie.hauteur];
-        this.piaPosees = listePieceAlea(5); // Nombre de pièces pourrait dépendre d'une variable joueur static dans jeu
+        this.remplirGrille(); // On remplit la grille de .
+        this.piaPosees = this.listePieceAlea(5); // Nombre de pièces pourrait dépendre d'une variable joueur static dans jeu
         this.piPosees = new ArrayList<Piece>();
+    }
+
+    public void remplirGrille() {
+        for (int i = 0; i < Partie.largeur; i++) {
+            for (int j = 0; j < Partie.hauteur; j++) {
+                this.grille[i][j] = '.';
+            }
+        }
     }
 
 
@@ -98,7 +108,6 @@ public class Partie implements Serializable{
 
         return false;
 
-
     }
 
     public boolean pieceSuperposee(Piece p) {
@@ -121,10 +130,44 @@ public class Partie implements Serializable{
                 throw new CaseDejaRemplieException("Deux carres se superposent");
             }
         } finally {
-            this.grille[x][y] = p.getId();
+            // On vérifie que la pièce est bien dans la liste d'éléments à poser
+            int place = this.piaPosees.indexOf(p);
+            if (place != -1) {
+                this.piPosees.remove(place);
+                this.piPosees.add(p);
+
+                // On ajoute les coordonnées à la pièce
+                p.setXY(x, y);
+
+                // On place la pièce sur la grille grâce à ses coordonnées relatives
+                ArrayList<Carre> listeCarre = p.getListe();
+                for (Carre carre : listeCarre) { 
+                    this.grille[x + carre.getX()][y + carre.getY()] = p.getId();
+                }
+            }
         }
     }
 
+    public void retirerDernierePiece() {
+        // On récupère la place de la dernière pièce ajoutée
+        int place = this.piPosees.size() - 1; 
+        Piece p = this.piPosees.get(place);
+        this.piPosees.remove(place);
+        this.piaPosees.add(p);
+        
+        // On récupère les coordonnées de la pièce
+        int x = p.getX();
+        int y = p.getY();
+
+        // On place des . aux emplacements de la pièce
+        ArrayList<Carre> listeCarre = p.getListe();
+        for (Carre carre : listeCarre) { 
+            this.grille[x + carre.getX()][y + carre.getY()] = '*';
+        }
+
+
+    }
+    
 
     public double nbPiPosees() {
         return (double) this.piPosees.size();
