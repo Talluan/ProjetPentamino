@@ -204,7 +204,7 @@ public class Partie implements Serializable{
     /**
      * méthode qui affiche la liste des pièces à poser
      */
-    public void affichageListePiece() {
+    public void afficherListePiece() {
         for (int i = 0; i < this.piaPosees.size(); i++) {
             System.out.println("piece " + i + 1 + " :" );
             this.piaPosees[i].afficherPiece();
