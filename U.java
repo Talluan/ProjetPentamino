@@ -1,6 +1,7 @@
 public class U extends Piece{
 
     public U(int x,int y){
+        super(x,y);
         this.setNomFichier("pieces/U.txt");
         try{
             this.lireFichier();
@@ -8,7 +9,5 @@ public class U extends Piece{
             e.printStackTrace();
         }
         this.setId('U');
-        this.setX(x);
-        this.setY(y);
     }
 }

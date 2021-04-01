@@ -6,7 +6,7 @@ public class Avance extends Joueur implements Serializable{
     }
 
     public double calculerScore(){
-        return 2*this.getListe().get(Jeu.numeroPartie).nbPiPosees();
+        return 2*((Partie)(this.getListe().get(Jeu.numeroPartie))).nbPiPosees();
     }
 
 }
