@@ -1,13 +1,13 @@
-public class L extends Piece {
-
-    public L(int x,int y){
+public class X extends Piece {
+    
+    public X(int x,int y){
         super(x,y);
-        this.setNomFichier("pieces/L.txt");
+        this.setNomFichier("pieces/X.txt");
         try{
             this.lireFichier();
         }catch (Exception e){
             e.printStackTrace();
         }
-        this.setId('L');
+        this.setId('X');
     }
 }
