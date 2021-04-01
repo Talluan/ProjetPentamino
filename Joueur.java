@@ -6,11 +6,6 @@ public abstract class Joueur implements Serializable {
     private double scoreMoyen;
     private ArrayList<Partie> liste;
 
-
-    // public static Joueur chargerJoueur(String nom) {
-        
-    // }
-
     public Joueur(String nom) {
         this.nom = nom;
         this.scoreMoyen = 0;
