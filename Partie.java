@@ -212,7 +212,9 @@ public class Partie implements Serializable{
     }
 
 
-
+    /**
+     * méthode qui affiche la grille de jeu
+     */
     public void afficherGrille() {
         for (int i = 0; i < Partie.largeur; i++) {
             for (int j = 0; j < Partie.hauteur; j++) {
