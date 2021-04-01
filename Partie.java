@@ -207,7 +207,7 @@ public class Partie implements Serializable{
     public void afficherListePiece() {
         for (int i = 0; i < this.piaPosees.size(); i++) {
             System.out.println("piece " + i + 1 + " :" );
-            this.piaPosees[i].afficherPiece();
+            this.piaPosees.get(i).afficherPiece();
         }
     }
 
