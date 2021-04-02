@@ -72,7 +72,58 @@ public class Jeu{
         }
     }
 
-    public static void main(String[] args){
+    public static int affichageMenu() {
+        System.out.println("0 : quitter le jeu");
+        System.out.println("1 : créer un nouveau joueur");
+        System.out.println("2 : choisir un joueur");
+        System.out.println("Que voulez vous faire ?");
+        Scanner sc = new Scanner(System.in);
+        int choix = sc.nextInt();
+        return choix;
+    }
+
+    public static int choisirJoueur() {
+        System.out.println("Quel joueur désirez vous jouer ?");
+        System.out.println("Affichage alphabetique");
+        Jeu.afficherListeAlpha();
+
+        System.out.println("Affichage au score");
+        Jeu.afficherListeScore();
         
+        Scanner sc = new Scanner(System.in);
+        int choix = sc.nextInt();
+        while (choix < 0 || choix > Jeu.listeJoueur.size()) {
+            choix = sc.nextInt();
+        }
+        return choix;
+    }
+
+
+
+    public static int choisirPartie() {
+        Jeu.joueurCharge.afficherParties();
+        Scanner sc = new Scanner(System.in);
+        int choix = sc.nextInt();
+        while (choix < 0 || choix > Jeu.listeJoueur.size()) {
+            choix = sc.nextInt();
+        }
+        return choix;
+    }
+
+    public static void main(String[] args){
+        boolean session = true;
+        while (session) {
+            int choix = Jeu.affichageMenu();
+            if (choix == 1) {
+                System.out.println("Affaire à suivre...");
+
+            }
+            else if (choix == 2) {
+                Jeu.joueurCharge = Jeu.listeJoueur.get(Jeu.choisirJoueur());
+            } 
+        }
+
+        System.exit(0);
+
     }
 }

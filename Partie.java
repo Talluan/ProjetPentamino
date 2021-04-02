@@ -241,7 +241,13 @@ public class Partie implements Serializable{
         }
     }
 
-
+    /**
+     * méthode qui affiche le nombre de pièces restantes à poser d'une partie
+     */
+    public void afficherDetails() {
+        int nbPieces = this.piaPosees.size();
+        System.out.println("Il reste" + nbPieces + " à poser dans cette partie !");
+    }
 
     /**
      * méthode qui indique le nombre de pièces posées

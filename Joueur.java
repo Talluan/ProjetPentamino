@@ -32,6 +32,14 @@ public abstract class Joueur implements Serializable {
         
     }
 
+    public void afficherParties() {
+        for (int i = 0; i < this.liste.size(); i++) {
+            System.out.print(i + " :");
+            this.liste.get(i).afficherDetails();
+        }
+    }
+
+
     public abstract double calculerScore();
 
     public void setNom(String name) {
