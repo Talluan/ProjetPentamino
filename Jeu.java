@@ -33,6 +33,44 @@ public class Jeu{
         }
     }
 
+    public static Comparator<Joueur> compareByName = new Comparator<Joueur>() {
+        @Override
+        public int compare(Joueur j1, Joueur j2) {
+            return j1.getNom().compareTo(j2.getNom());
+        }
+    };
+
+    public static Comparator<Joueur> compareByScore = new Comparator<Joueur>() {
+        @Override
+        public int compare(Joueur j1, Joueur j2) {
+            if (j1.getScore() < j2.getScore()) {
+                return -1;
+            } 
+            else if(j1.getScore() == j2.getScore()) {
+                return j1.getNom().compareTo(j2.getNom());
+            }
+            else {
+                return 1;
+            }
+        }
+    };
+
+
+    public static void afficherListeAlpha() {
+        ArrayList<Joueur> listeAlpha = Jeu.listeJoueur;
+        Collections.sort(listeAlpha, compareByName);
+        for (int i = 0; i < listeAlpha.size(); i++) {
+            System.out.printf("%d : %12s %7.2f\n"  , i, listeAlpha.get(i).getNom(), listeAlpha.get(i).getScore());
+        }
+    }
+
+    public static void afficherListeScore() {
+        ArrayList<Joueur> listeAlpha = Jeu.listeJoueur;
+        Collections.sort(listeAlpha, compareByScore);
+        for (int i = 0; i < listeAlpha.size(); i++) {
+            System.out.printf("%d : %12s %7.2f\n"  , i, listeAlpha.get(i).getNom(), listeAlpha.get(i).getScore());
+        }
+    }
 
     public static void main(String[] args){
         
