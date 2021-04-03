@@ -141,17 +141,25 @@ public class Jeu{
         Jeu.joueurCharge.afficherParties();
         Scanner sc = new Scanner(System.in);
         int choix = sc.nextInt();
-        while (choix < 0 || choix > Jeu.listeJoueur.size()) {
+        while (choix < 0 || choix > Jeu.listeJoueur.getListe().size()) {
             choix = sc.nextInt();
         }
+<<<<<<< HEAD
         return (Partie)Jeu.joueurCharge.getListe().get(choix);
+=======
+        return Jeu.joueurCharge.getListe().get(choix);
+>>>>>>> 8044150c7135de1cb42621fce8cba0b00d6a3f44
     }
 
     public static void creerPartie() {
         // On ajoute une partie à la liste de parties du joueur
         Jeu.joueurCharge.getListe().add(new Partie());
         // On place la partie créée dans la partie courante pour la jouer
+<<<<<<< HEAD
         Jeu.game =(Partie) Jeu.joueurCharge.getListe().get(Jeu.joueurCharge.getListe().size()-1);
+=======
+        Jeu.game = Jeu.joueurCharge.getListe().get(Jeu.joueurCharge.liste.size()-1);
+>>>>>>> 8044150c7135de1cb42621fce8cba0b00d6a3f44
     }
 
     // public static void startGame() {
