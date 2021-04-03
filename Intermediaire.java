@@ -6,7 +6,8 @@ public class Intermediaire extends Joueur implements Serializable{
     }
 
     public double calculerScore(){
-        return 1.5*((Partie)(this.getListe().get(Jeu.numeroPartie))).nbPiPosees();
+        Jeu.game.setScore(1.5*(Jeu.game).nbPiPosees());
+        return Jeu.game.getScore();
     }
 
 }

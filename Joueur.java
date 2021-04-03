@@ -42,6 +42,14 @@ public abstract class Joueur implements Serializable {
 
     public abstract double calculerScore();
 
+    public void calculerScoreMoyen(){
+        double total=0;
+        for(Partie p : this.liste){
+            total+=p.getScore();
+        }
+        this.scoreMoyen=total/this.liste.size();
+    }
+
     public void setNom(String name) {
         this.nom = name;
     }
