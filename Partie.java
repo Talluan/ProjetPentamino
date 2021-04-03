@@ -33,6 +33,11 @@ public class Partie implements Serializable{
      */
     private ArrayList<Piece> piaPosees;
 
+    /**
+     * Score de la partie
+     */
+    private double score;
+
 
 
     /**
@@ -255,6 +260,22 @@ public class Partie implements Serializable{
      */
     public double nbPiPosees() {
         return (double) this.piPosees.size();
+    }
+
+    /**
+     * méthode qui retourne le score actuel de la partie
+     * @return un double le score de la partie
+     */
+    public double getScore(){
+        return this.score;
+    }
+
+    /**
+     * méthode qui change le score de la partie
+     * @param sc le nouveau score
+     */
+    public void setScore(double sc){
+        this.score=sc;
     }
 
 }
