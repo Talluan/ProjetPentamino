@@ -50,6 +50,10 @@ public abstract class Joueur implements Serializable {
         this.scoreMoyen=total/this.liste.size();
     }
 
+    public void ajouterPartie(Partie p){
+        this.liste.add(p);
+    }
+
     public void setNom(String name) {
         this.nom = name;
     }

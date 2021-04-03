@@ -24,6 +24,17 @@ public class Jeu{
     }
 
     public static void sauvegarder(){
+        Jeu.joueurCharge.calculerScore();
+        Jeu.joueurCharge.ajouterPartie(Jeu.game);
+        Joueur joueurASupprimer;
+        for(Joueur j : Jeu.listeJoueur){
+            if(Jeu.joueurCharge.getNom().equals(j.getNom())){
+                joueurASupprimer=j;
+            }
+        }
+        Jeu.listeJoueur.remove(joueurASupprimer);
+        Jeu.listeJoueur.add(Jeu.joueurCharge);
+
         try{
             ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("donnes.dat"));
             oos.writeObject(Jeu.listeJoueur);
