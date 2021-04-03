@@ -118,7 +118,23 @@ public class Jeu{
         System.out.println("Saisissez le nom du nouveau joueur : ");
         while(!termine){
             nom = sc.nextLine();
-            
+            for(Joueur j : Jeu.listeJoueur){
+                if(nom.equals(j.getNom())){
+                    System.out.println("Ce nom de joueur est deja pris!");
+                    existeDeja=true;
+                }
+            }
+            while(existeDeja){
+                System.out.println("Entrez un nom non existant : ");
+                nom = sc.nextLine();
+                existeDeja=false;
+                for(Joueur j : Jeu.listeJoueur){
+                    if(nom.equals(j.getNom())){
+                        System.out.println("Ce nom de joueur est deja pris!");
+                        existeDeja=true;
+                    }
+                }
+            }
             System.out.println("etes vous sur de bien creer un joueur nomme \""+nom+"\"? (oui ou non)");
             validation = sc.nextLine();
             if(validation.equals("oui")){
