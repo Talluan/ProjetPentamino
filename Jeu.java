@@ -94,6 +94,10 @@ public class Jeu{
     }
 
     public static Joueur choisirJoueur() {
+        if(Jeu.listeJoueur.size()==0){
+            System.out.println("Pas de joueur! Redirection vers la creation de joueur");
+            Jeu.creerJoueur();
+        }
         System.out.println("Quel joueur desirez vous jouer ?");
         System.out.println("Affichage alphabetique");
         Jeu.afficherListeAlpha();
@@ -167,6 +171,10 @@ public class Jeu{
     }
 
     public static void choisirPartie() {
+        if(Jeu.joueurCharge.getListe().size()==0){
+            System.out.println("Pas de partie! Redirection vers la creation de partie");
+            Jeu.creerPartie();
+        }
         Jeu.joueurCharge.afficherParties();
         Scanner sc = new Scanner(System.in);
         int choix = sc.nextInt();
