@@ -26,7 +26,7 @@ public class Jeu{
     public static void sauvegarder(){
         Jeu.joueurCharge.calculerScore();
         Jeu.joueurCharge.ajouterPartie(Jeu.game);
-        Joueur joueurASupprimer;
+        Joueur joueurASupprimer = new Debutant("jarod");
         for(Joueur j : Jeu.listeJoueur){
             if(Jeu.joueurCharge.getNom().equals(j.getNom())){
                 joueurASupprimer=j;
@@ -113,10 +113,12 @@ public class Jeu{
         Scanner sc = new Scanner(System.in);
         int difficulte;
         String nom,validation;
+        boolean existeDeja=false;
         boolean termine=false;
         System.out.println("Saisissez le nom du nouveau joueur : ");
         while(!termine){
             nom = sc.nextLine();
+            
             System.out.println("etes vous sur de bien creer un joueur nomme \""+nom+"\"? (oui ou non)");
             validation = sc.nextLine();
             if(validation.equals("oui")){
