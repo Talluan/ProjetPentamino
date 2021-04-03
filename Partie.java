@@ -268,7 +268,7 @@ public class Partie implements Serializable{
      */
     public ArrayList<Piece> getPiaPosees() {
         return this.piaPosees;
-
+    }
     /**
      * méthode qui retourne le score actuel de la partie
      * @return un double le score de la partie
