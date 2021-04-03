@@ -251,7 +251,7 @@ public class Partie implements Serializable{
      */
     public void afficherDetails() {
         int nbPieces = this.piaPosees.size();
-        System.out.println("Il reste" + nbPieces + " à poser dans cette partie !");
+        System.out.println("Il reste " + nbPieces + " pieces a poser dans cette partie !");
     }
 
     /**
