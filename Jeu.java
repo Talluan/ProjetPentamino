@@ -98,6 +98,44 @@ public class Jeu{
         return Jeu.listeJoueur.get(choix);
     }
 
+    public static void creerJoueur(){
+        Scanner sc = new Scanner(System.in);
+        int difficulte;
+        String nom,validation;
+        boolean termine=false;
+        System.out.println("Saisissez le nom du nouveau joueur : ");
+        while(!termine){
+            nom = sc.nextLine();
+            System.out.println("etes vous sur de bien creer un joueur nomme \""+nom+"\"? (oui ou non)");
+            validation = sc.nextLine();
+            if(validation.equals("oui")){
+                System.out.println("Choisissez une difficulte (1 : Debutant, 2 : Intermediaire, 3 : Avance) :");
+                difficulte = sc.nextInt();
+                while(difficulte<1 && difficulte>3){
+                    System.out.println("Mauvais chiffre! (tapez un nombre entre 1 et 3) :");
+                    difficulte = sc.nextInt();
+                }
+                switch(difficulte){
+                    case 1:
+                        Jeu.listeJoueur.add(new Debutant(nom));
+                        break;
+                    case 2:
+                        Jeu.listeJoueur.add(new Intermediaire(nom));
+                        break;
+                    case 3:
+                        Jeu.listeJoueur.add(new Avance(nom));
+                        break;
+                    default:
+                        Jeu.listeJoueur.add(new Debutant(nom));
+                        break;
+                }
+                System.out.println("Joueur cree avec succes!");
+                termine=true;
+            }else{
+                System.out.println("Saisissez a nouveau un nom : ");
+            }
+        }
+    }
 
     public static Partie choisirPartie() {
         Jeu.joueurCharge.afficherParties();
