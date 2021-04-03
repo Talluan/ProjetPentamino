@@ -257,4 +257,9 @@ public class Partie implements Serializable{
         return (double) this.piPosees.size();
     }
 
+
+    public ArrayList<Piece> getPiaPosees() {
+        return this.piaPosees;
+    }
+
 }

@@ -137,14 +137,15 @@ public class Jeu{
         }
     }
 
-    public static Partie choisirPartie() {
+    public static void choisirPartie() {
         Jeu.joueurCharge.afficherParties();
         Scanner sc = new Scanner(System.in);
         int choix = sc.nextInt();
         while (choix < 0 || choix > Jeu.joueurCharge.getListe().size()) {
             choix = sc.nextInt();
         }
-        return (Partie)Jeu.joueurCharge.getListe().get(choix);
+        Jeu.game = (Partie)Jeu.joueurCharge.getListe().get(choix);
+        Jeu.joueurCharge.getListe().remove(choix);
     }
 
     public static void creerPartie() {
@@ -154,12 +155,34 @@ public class Jeu{
         Jeu.game =(Partie) Jeu.joueurCharge.getListe().get(Jeu.joueurCharge.getListe().size()-1);
     }
 
-    // public static void startGame() {
-    //     if (Jeu.joueurCharge != null && Jeu.game != null) {
-    //         Jeu.game.affic
-    //     }
-    //     return;
-    // }
+    public static void startGame() {
+        if (Jeu.joueurCharge != null && Jeu.game != null) {
+            boolean sortie = false;
+            while (!sortie) {
+                Jeu.game.afficherGrille();
+                System.out.println();
+                Jeu.game.afficherListePiece();
+                System.out.println("Quelle piece voulez vous jouer ? Tapez -1 pour quitter la partie.");
+                Scanner sc = new Scanner(System.in);
+                int choix = sc.nextInt();
+
+                Piece p = null;
+
+                // On sort de la partie si l'utilisateur tape -1
+                while (choix < -1 || choix > Jeu.game.getPiaPosees().size()) {
+                    System.out.println("Tapez un numéro existant ! -1 pour quitter.");
+                }
+                if (choix == -1) {
+                    sortie = true;
+                }
+                else {
+                    p = Jeu.game.getPiaPosees().get(choix);
+                    Jeu.joueurCharge.poserPiece(p);
+                }
+            }
+        }
+        return;
+    }
 
 
     public static void main(String[] args){
@@ -178,10 +201,8 @@ public class Jeu{
                 // Initialise le joueur dans le joueur courant
                 Jeu.joueurCharge = Jeu.choisirJoueur();
                 // Initialise la partie dans la partie courante
-                Jeu.game = Jeu.choisirPartie();
-
-
-
+                Jeu.choisirPartie();
+                Jeu.startGame();
             } 
 
             // cas de sortie du jeu
