@@ -6,7 +6,7 @@ public class Jeu{
 
     public static ArrayList<Joueur> listeJoueur=new ArrayList<Joueur>();
     public static Joueur joueurCharge;
-    public static int numeroPartie;
+    public static Partie game;
 
     public static void chargerListeJoueur(){
         try{
@@ -82,8 +82,8 @@ public class Jeu{
         return choix;
     }
 
-    public static int choisirJoueur() {
-        System.out.println("Quel joueur désirez vous jouer ?");
+    public static Joueur choisirJoueur() {
+        System.out.println("Quel joueur desirez vous jouer ?");
         System.out.println("Affichage alphabetique");
         Jeu.afficherListeAlpha();
 
@@ -95,34 +95,64 @@ public class Jeu{
         while (choix < 0 || choix > Jeu.listeJoueur.size()) {
             choix = sc.nextInt();
         }
-        return choix;
+        return Jeu.listeJoueur.get(choix);
     }
 
 
-
-    public static int choisirPartie() {
+    public static Partie choisirPartie() {
         Jeu.joueurCharge.afficherParties();
         Scanner sc = new Scanner(System.in);
         int choix = sc.nextInt();
         while (choix < 0 || choix > Jeu.listeJoueur.size()) {
             choix = sc.nextInt();
         }
-        return choix;
+        return Jeu.joueurCharge.liste.get(choix);
     }
+
+    public static void creerPartie() {
+        // On ajoute une partie à la liste de parties du joueur
+        Jeu.joueurCharge.getliste().add(new Partie());
+        // On place la partie créée dans la partie courante pour la jouer
+        Jeu.game = Jeu.joueurCharge.getliste().get(Jeu.joueurCharge.liste.size()-1);
+    }
+
+    // public static void startGame() {
+    //     if (Jeu.joueurCharge != null && Jeu.game != null) {
+    //         Jeu.game
+    //     }
+    //     return;
+    // }
+
 
     public static void main(String[] args){
         boolean session = true;
         while (session) {
+            // affiche l'accueil
             int choix = Jeu.affichageMenu();
-            if (choix == 1) {
-                System.out.println("Affaire à suivre...");
 
+            // cas de la création d'un joueur
+            if (choix == 1) {
+                System.out.println("Affaire a suivre...");
             }
+
+            // cas de la sélection d'un joueur
             else if (choix == 2) {
+                // Initialise le joueur dans le joueur courant
                 Jeu.joueurCharge = Jeu.listeJoueur.get(Jeu.choisirJoueur());
+                // Initialise la partie dans la partie courante
+                Jeu.game = Jeu.joueurCharge.liste.get(Jeu.choisirPartie());
+
+
+
             } 
+
+            // cas de sortie du jeu
+            else if (choix == 0) {
+                session = false;
+            }
         }
 
+        Jeu.sauvegarder();
         System.exit(0);
 
     }
