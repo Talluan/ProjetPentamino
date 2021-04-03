@@ -144,19 +144,19 @@ public class Jeu{
         while (choix < 0 || choix > Jeu.listeJoueur.size()) {
             choix = sc.nextInt();
         }
-        return Jeu.joueurCharge.liste.get(choix);
+        return (Partie)Jeu.joueurCharge.getListe().get(choix);
     }
 
     public static void creerPartie() {
         // On ajoute une partie à la liste de parties du joueur
-        Jeu.joueurCharge.getliste().add(new Partie());
+        Jeu.joueurCharge.getListe().add(new Partie());
         // On place la partie créée dans la partie courante pour la jouer
-        Jeu.game = Jeu.joueurCharge.getliste().get(Jeu.joueurCharge.liste.size()-1);
+        Jeu.game =(Partie) Jeu.joueurCharge.getListe().get(Jeu.joueurCharge.getListe().size()-1);
     }
 
     // public static void startGame() {
     //     if (Jeu.joueurCharge != null && Jeu.game != null) {
-    //         Jeu.game
+    //         Jeu.game.affic
     //     }
     //     return;
     // }
@@ -176,9 +176,9 @@ public class Jeu{
             // cas de la sélection d'un joueur
             else if (choix == 2) {
                 // Initialise le joueur dans le joueur courant
-                Jeu.joueurCharge = Jeu.listeJoueur.get(Jeu.choisirJoueur());
+                Jeu.joueurCharge = Jeu.choisirJoueur();
                 // Initialise la partie dans la partie courante
-                Jeu.game = Jeu.joueurCharge.liste.get(Jeu.choisirPartie());
+                Jeu.game = Jeu.choisirPartie();
 
 
 
