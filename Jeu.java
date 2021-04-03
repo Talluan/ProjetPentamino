@@ -100,7 +100,7 @@ public class Jeu{
 
         System.out.println("Affichage au score");
         Jeu.afficherListeScore();
-        
+        System.out.println(Jeu.listeJoueur.size());
         Scanner sc = new Scanner(System.in);
         int choix = sc.nextInt();
         while (choix < 0 || choix > Jeu.listeJoueur.size()) {
@@ -151,6 +151,7 @@ public class Jeu{
     }
 
     public static void choisirPartie() {
+        System.out.println("ICILA");
         Jeu.joueurCharge.afficherParties();
         Scanner sc = new Scanner(System.in);
         int choix = sc.nextInt();
@@ -197,6 +198,17 @@ public class Jeu{
         return;
     }
 
+    public static int menuParties() {
+        System.out.println("0 : retourner au menu");
+        System.out.println("1 : créer partie");
+        System.out.println("2 : choisir partie");
+        Scanner sc = new Scanner(System.in);
+        int choix = sc.nextInt();
+        while (choix < 0 || choix > 2) {
+            choix = sc.nextInt();
+        }
+        return choix;
+    }
 
     public static void main(String[] args){
         boolean session = true;
@@ -214,7 +226,15 @@ public class Jeu{
                 // Initialise le joueur dans le joueur courant
                 Jeu.joueurCharge = Jeu.choisirJoueur();
                 // Initialise la partie dans la partie courante
-                Jeu.choisirPartie();
+                System.out.println("ICILA");
+                int dec = Jeu.menuParties();
+                if (dec == 0)
+                    break;
+                else if (dec == 1)
+                    Jeu.creerPartie();
+                else if (dec == 2)
+                    Jeu.choisirPartie();
+
                 Jeu.startGame();
             } 
 
