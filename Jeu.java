@@ -85,7 +85,7 @@ public class Jeu{
 
     public static int affichageMenu() {
         System.out.println("0 : quitter le jeu");
-        System.out.println("1 : créer un nouveau joueur");
+        System.out.println("1 : creer un nouveau joueur");
         System.out.println("2 : choisir un joueur");
         System.out.println("Que voulez vous faire ?");
         Scanner sc = new Scanner(System.in);
@@ -167,7 +167,6 @@ public class Jeu{
     }
 
     public static void choisirPartie() {
-        System.out.println("ICILA");
         Jeu.joueurCharge.afficherParties();
         Scanner sc = new Scanner(System.in);
         int choix = sc.nextInt();
@@ -216,7 +215,7 @@ public class Jeu{
 
     public static int menuParties() {
         System.out.println("0 : retourner au menu");
-        System.out.println("1 : créer partie");
+        System.out.println("1 : creer partie");
         System.out.println("2 : choisir partie");
         Scanner sc = new Scanner(System.in);
         int choix = sc.nextInt();
@@ -242,7 +241,6 @@ public class Jeu{
                 // Initialise le joueur dans le joueur courant
                 Jeu.joueurCharge = Jeu.choisirJoueur();
                 // Initialise la partie dans la partie courante
-                System.out.println("ICILA");
                 int dec = Jeu.menuParties();
                 if (dec == 0)
                     break;
