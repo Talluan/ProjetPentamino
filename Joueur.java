@@ -18,13 +18,13 @@ public abstract class Joueur implements Serializable {
         int x = sc.nextInt();
         int y = sc.nextInt();
         try {
-            this.liste.get(Jeu.numeroPartie).ajouterPiece(piece, x, y);
+            Jeu.game.ajouterPiece(piece, x, y);
         } catch (CaseDejaRemplieException e) { // le type de l'exeption va changer là c'est si les pièces se superposent
-            this.liste.get(Jeu.numeroPartie).retirerDernierePiece();
-            System.out.println("Les pieces se superposent !");
+            Jeu.game.retirerDernierePiece();
+            System.out.println("Les pieces se superposent !"); 
             return false;
         } catch (PieceDebordeException e) {
-            this.liste.get(Jeu.numeroPartie).retirerDernierePiece();
+            Jeu.game.retirerDernierePiece();
             System.out.println("La piece sort de la grille !");
             return false;
         }
@@ -58,7 +58,7 @@ public abstract class Joueur implements Serializable {
         return this.scoreMoyen;
     }
 
-    public ArrayList getListe() {
+    public ArrayList<Partie> getListe() {
         return this.liste;
     }
     
