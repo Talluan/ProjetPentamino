@@ -263,6 +263,13 @@ public class Partie implements Serializable{
     }
 
     /**
+     * méthode qui retourne la liste de pièces à poser
+     * @return liste de pièces à poser
+     */
+    public ArrayList<Piece> getPiaPosees() {
+        return this.piaPosees;
+    }
+    /**
      * méthode qui retourne le score actuel de la partie
      * @return un double le score de la partie
      */
