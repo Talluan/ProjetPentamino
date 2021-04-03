@@ -204,7 +204,7 @@ public class Jeu{
 
             // cas de la création d'un joueur
             if (choix == 1) {
-                System.out.println("Affaire a suivre...");
+                Jeu.creerJoueur();
             }
 
             // cas de la sélection d'un joueur
