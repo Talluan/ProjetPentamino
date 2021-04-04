@@ -15,7 +15,9 @@ public abstract class Joueur implements Serializable {
     public boolean poserPiece(Piece piece) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Ou voulez vous placer la piece ?");
+        System.out.print("En X ? : ");
         int x = sc.nextInt();
+        System.out.print("En Y ? : ");
         int y = sc.nextInt();
         try {
             Jeu.game.ajouterPiece(piece, x, y);

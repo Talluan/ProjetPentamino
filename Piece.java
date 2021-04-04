@@ -103,17 +103,15 @@ public abstract class Piece implements Serializable{
      * @param p Pièce que l'on souhaite vérifier
      * @return booléen indiquant si elles sont superposées ou non
      */
-	public boolean superpose(Piece p){
-		Carre c1;
-		for(int i=0;i<this.liste.size();i++){
-			c1=(Carre)this.liste.get(i);
-			for(int j=0;j<p.liste.size();j++){
-				if(((c1.getX()+this.x)==(p.x+p.liste.get(i).getX()))&&((c1.getY()+this.y)==(p.y+p.liste.get(i).getY()))){
-					return true;
-				}
-			}
-		}
-		return false;
+	public boolean superpose(Piece p,int x,int y){
+        for(Carre c1 : p.liste){
+            for(Carre c2 : this.liste){
+                if( (c1.getX()+x)==(c2.getX()+this.x) && (c1.getY()+y)==(c2.getY()+this.y) ){
+                    return true;
+                }
+            }
+        }
+        return false;
 	}
 
     /**

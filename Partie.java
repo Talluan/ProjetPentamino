@@ -71,7 +71,7 @@ public class Partie implements Serializable{
     public ArrayList<Piece> listePieceAlea(int taille) {
         ArrayList<Piece> tab = new ArrayList<Piece>();
         for (int i = 0; i < taille; i++) {
-            int nbAlea = (int) Math.random()*10;
+            int nbAlea = (int) (Math.random()*10);
             switch (nbAlea) {
                 case 0:
                     tab.add(new C(0, 0));
@@ -155,9 +155,9 @@ public class Partie implements Serializable{
      * @param p pièce que l'on souhaite vérifier
      * @return un booléen indiquant si la pièce est superposée
      */
-    public boolean pieceSuperposee(Piece p) {
+    public boolean pieceSuperposee(Piece p,int x,int y) {
         for (Piece p2 : this.piPosees) {
-            if (p.superpose(p2)) {
+            if (p2.superpose(p,x,y)) {
                 return true;
             }
         }
@@ -178,7 +178,7 @@ public class Partie implements Serializable{
             if (debordeGrille(p, x, y)) {
                 throw new PieceDebordeException("La piece deborde de la grille de jeu");
             }
-            else if(pieceSuperposee(p)) {
+            else if(pieceSuperposee(p,x,y)) {
                 throw new CaseDejaRemplieException("Deux carres se superposent");
             }
         } finally {
@@ -221,6 +221,13 @@ public class Partie implements Serializable{
             this.grille[y + carre.getY()][x + carre.getX()] = '.';
         }
 
+        // On redessine toutes les pièces sur la grille
+        for(Piece pi : Jeu.game.piPosees){
+            listeCarre = pi.getListe();
+            for(Carre c : listeCarre){
+                this.grille[pi.getY() + c.getY()][pi.getX() + c.getX()] = pi.getId();
+            }
+        }
 
     }
     
@@ -255,7 +262,7 @@ public class Partie implements Serializable{
      */
     public void afficherDetails() {
         int nbPieces = this.piaPosees.size();
-        System.out.println("Il reste " + nbPieces + " pieces a poser dans cette partie !");
+        System.out.println("Il reste " + nbPieces + " pieces a poser dans cette partie ! (Score : "+this.score+")");
     }
 
     /**

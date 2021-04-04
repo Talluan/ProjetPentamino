@@ -16,6 +16,9 @@ public class Jeu{
             ArrayList<Joueur> inter=(ArrayList<Joueur>) ois.readObject();
             Jeu.listeJoueur = new ArrayList<Joueur>(inter);
             ois.close();
+            for(Joueur j : Jeu.listeJoueur){
+                j.calculerScoreMoyen();
+            }
         }catch (IOException ioe){
             System.out.println("ALERTE : Une erreur dans le chargement (erreur fichier)");
         }catch (ClassNotFoundException cnf){
@@ -87,9 +90,10 @@ public class Jeu{
         System.out.println("0 : quitter le jeu");
         System.out.println("1 : creer un nouveau joueur");
         System.out.println("2 : choisir un joueur");
-        System.out.println("Que voulez vous faire ?");
+        System.out.print("Que voulez vous faire ?  ");
         Scanner sc = new Scanner(System.in);
         int choix = sc.nextInt();
+        System.out.println();
         return choix;
     }
 
@@ -109,10 +113,13 @@ public class Jeu{
         
         // réception du résultat
         Scanner sc = new Scanner(System.in);
+        System.out.print("Votre choix : ");
         int choix = sc.nextInt();
         while (choix < 0 || choix > Jeu.listeJoueur.size()) {
+            System.out.print("Votre choix : ");
             choix = sc.nextInt();
         }
+        System.out.println();
         return Jeu.listeJoueur.get(choix);
     }
 
@@ -204,13 +211,15 @@ public class Jeu{
                 Jeu.game.afficherListePiece();
                 System.out.println("Quelle piece voulez vous jouer ? Tapez -1 pour quitter la partie.");
                 Scanner sc = new Scanner(System.in);
+                System.out.print("Votre choix : ");
                 int choix = sc.nextInt();
+                System.out.println();
 
                 Piece p = null;
 
                 // On sort de la partie si l'utilisateur tape -1
                 while (choix < -1 || choix > Jeu.game.getPiaPosees().size()) {
-                    System.out.println("Tapez un numéro existant ! -1 pour quitter.");
+                    System.out.println("Tapez un numero existant ! -1 pour quitter.");
                 }
                 if (choix == -1) {
                     sortie = true;
@@ -229,15 +238,22 @@ public class Jeu{
         System.out.println("1 : creer partie");
         System.out.println("2 : choisir partie");
         Scanner sc = new Scanner(System.in);
+        System.out.print("Votre choix : ");
         int choix = sc.nextInt();
         while (choix < 0 || choix > 2) {
+            System.out.print("Votre choix : ");
             choix = sc.nextInt();
         }
+        System.out.println();
         return choix;
     }
 
     public static void main(String[] args){
         boolean session = true;
+        chargerListeJoueur();
+        System.out.println();
+        System.out.println("    ____             __                  _           \n   / __ \\___  ____  / /_____ _____ ___  (_)___  ____ \n  / /_/ / _ \\/ __ \\/ __/ __ `/ __ `__ \\/ / __ \\/ __ \\\n / ____/  __/ / / / /_/ /_/ / / / / / / / / / / /_/ /\n/_/    \\___/_/ /_/\\__/\\__,_/_/ /_/ /_/_/_/ /_/\\____/ ");
+        System.out.println();
         while (session) {
             // affiche l'accueil
             int choix = Jeu.affichageMenu();
