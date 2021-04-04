@@ -64,7 +64,7 @@ public abstract class Piece implements Serializable{
 			for(int i=0;i<ligne.length();i++) {
 				carre=ligne.charAt(i);
 				if(carre=='#') {
-					this.liste.add(new Carre(haut,i));
+					this.liste.add(new Carre(i,haut));
 				}
 				
 			}
@@ -72,8 +72,8 @@ public abstract class Piece implements Serializable{
 			ligne=br.readLine();
 		}
 
-        this.largeur = haut;
-        this.hauteur = larg;
+        this.largeur = larg;
+        this.hauteur = haut;
 	}
     /**
      * méthode qui indique si 2 pièces ont des formes similaires
@@ -129,31 +129,28 @@ public abstract class Piece implements Serializable{
      * méthode qui affiche une pièce en entier
      */
     public void afficherPiece() {
-        char[][] tab = new char[this.largeur][this.hauteur];
         System.out.println(this.id);
-        // remplit un tableau avec des # ou des .
-        for (int i = 0; i < tab.length; i++) {
-            for (int j = 0; j < tab[i].length; j++) {
-                boolean trouve = false;
-                for (Carre carre : this.liste) {
-                    if(carre.getX() == i && carre.getY() == j) {
-                        tab[i][j] = '#';
-                        trouve = true;
-                        break;
+        boolean trouve;
+        String chaine="";
+        int cy=0;
+        for(int i=0;i<this.hauteur;i++){
+            for(int j=0;j<this.largeur;j++){
+                trouve = false;
+                for(Carre c :this.liste){
+                    if(c.getX()==j && c.getY()==i){
+                        trouve=true;
                     }
                 }
-                if (!trouve) {
-                    tab[i][j] = '.';
+                if(trouve){
+                    chaine+="#";
+                    trouve=false;
+                }else{
+                    chaine+=".";
                 }
             }
+            chaine+="\n";
         }
-        // affiche le tableau rempli
-        for (int i = 0; i < tab.length; i++) {
-            for (int j = 0; j < tab[i].length; j++) {
-                System.out.print(tab[i][j]);
-            }
-            System.out.println();
-        }
+        System.out.println(chaine);
     }
 
 	
