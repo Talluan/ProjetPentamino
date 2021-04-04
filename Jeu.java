@@ -76,10 +76,10 @@ public class Jeu{
     }
 
     public static void afficherListeScore() {
-        ArrayList<Joueur> listeAlpha = Jeu.listeJoueur;
-        Collections.sort(listeAlpha, compareByScore);
-        for (int i = 0; i < listeAlpha.size(); i++) {
-            System.out.printf("%d : %12s %7.2f\n"  , i, listeAlpha.get(i).getNom(), listeAlpha.get(i).getScore());
+        ArrayList<Joueur> listeScore = Jeu.listeJoueur;
+        Collections.sort(listeScore, compareByScore);
+        for (int i = 0; i < listeScore.size(); i++) {
+            System.out.printf("%d : %12s %7.2f\n"  , i, listeScore.get(i).getNom(), listeScore.get(i).getScore());
         }
     }
 
@@ -94,17 +94,20 @@ public class Jeu{
     }
 
     public static Joueur choisirJoueur() {
+        // cas où la liste de joueurs est vide
         if(Jeu.listeJoueur.size()==0){
             System.out.println("Pas de joueur! Redirection vers la creation de joueur");
             Jeu.creerJoueur();
         }
         System.out.println("Quel joueur desirez vous jouer ?");
+
         System.out.println("Affichage alphabetique");
         Jeu.afficherListeAlpha();
 
         System.out.println("Affichage au score");
         Jeu.afficherListeScore();
-        System.out.println(Jeu.listeJoueur.size());
+        
+        // réception du résultat
         Scanner sc = new Scanner(System.in);
         int choix = sc.nextInt();
         while (choix < 0 || choix > Jeu.listeJoueur.size()) {
