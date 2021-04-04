@@ -193,6 +193,11 @@ public abstract class Piece implements Serializable{
 		this.id=nid;
 	}
 
+    public void setListe(ArrayList<Carre> ar) {
+        this.liste = ar;
+    }
+
+
     /**
      * méthode qui initialise le nom du fichier source
      * @param nnom nom du fichier source
