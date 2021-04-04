@@ -48,35 +48,61 @@ public abstract class Piece implements Serializable{
      * méthode qui lit un fichier stockant une pièce
      * @throws IOException 
      */
-	public void lireFichier() throws IOException{
+	// public void lireFichier() throws IOException{
+	// 	BufferedReader br = new BufferedReader(new FileReader(this.nomFichier));
+	// 	String ligne = br.readLine();
+	// 	char carre;
+	// 	int haut=0;
+    //     int larg=0;
+	// 	while(ligne!=null){
+    //         // on récupère la largeur de la ligne si elle est plus grande que celle stockée
+    //         if (larg < ligne.length()) {
+    //             larg = ligne.length();
+    //         }
+
+    //         // si le caractère correspond à un # dans le fichier, ajoute un carre aux coordonnées
+	// 		for(int i=0;i<ligne.length();i++){
+	// 			carre=ligne.charAt(i);
+	// 			if(carre=='#'){
+	// 				this.liste.add(new Carre(haut,i));
+	// 			}
+				
+	// 		}
+	// 		haut++;
+	// 		ligne=br.readLine();
+	// 	}
+
+    //     this.largeur = haut;
+    //     this.hauteur = larg;
+	// }
+	
+    public void lireFichier() throws IOException{
 		BufferedReader br = new BufferedReader(new FileReader(this.nomFichier));
 		String ligne = br.readLine();
 		char carre;
 		int haut=0;
         int larg=0;
 		while(ligne!=null){
-
             // on récupère la largeur de la ligne si elle est plus grande que celle stockée
             if (larg < ligne.length()) {
                 larg = ligne.length();
             }
 
             // si le caractère correspond à un # dans le fichier, ajoute un carre aux coordonnées
-			for(int i=0;i<ligne.length();i++){
+			for(int i=0;i<ligne.length();i++) {
 				carre=ligne.charAt(i);
-				if(carre=='#'){
-					this.liste.add(new Carre(i,hauteur));
+				if(carre=='#') {
+					this.liste.add(new Carre(haut,i));
 				}
 				
 			}
-			hauteur++;
+			haut++;
 			ligne=br.readLine();
 		}
 
-        this.largeur = larg;
-        this.hauteur = haut;
+        this.largeur = haut;
+        this.hauteur = larg;
 	}
-	
     /**
      * méthode qui indique si 2 pièces ont des formes similaires
      * @return booléen qui indique si elles ont la même forme ou non
@@ -132,7 +158,7 @@ public abstract class Piece implements Serializable{
      */
     public void afficherPiece() {
         char[][] tab = new char[this.largeur][this.hauteur];
-
+        System.out.println(this.id);
         // remplit un tableau avec des # ou des .
         for (int i = 0; i < tab.length; i++) {
             for (int j = 0; j < tab[i].length; j++) {
@@ -149,12 +175,12 @@ public abstract class Piece implements Serializable{
                 }
             }
         }
-
         // affiche le tableau rempli
         for (int i = 0; i < tab.length; i++) {
             for (int j = 0; j < tab[i].length; j++) {
-                System.out.println(tab[i][j]);
+                System.out.print(tab[i][j]);
             }
+            System.out.println();
         }
     }
 
@@ -193,10 +219,13 @@ public abstract class Piece implements Serializable{
 		this.id=nid;
 	}
 
+    /**
+     * méthode qui initialise la liste de carrés d'une pièce
+     * @param ar liste de Carrés
+     */
     public void setListe(ArrayList<Carre> ar) {
         this.liste = ar;
     }
-
 
     /**
      * méthode qui initialise le nom du fichier source
