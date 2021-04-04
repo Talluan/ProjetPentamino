@@ -185,7 +185,7 @@ public class Partie implements Serializable{
             // On vérifie que la pièce est bien dans la liste d'éléments à poser
             int place = this.piaPosees.indexOf(p);
             if (place != -1) {
-                this.piPosees.remove(place);
+                this.piaPosees.remove(place);
                 this.piPosees.add(p);
 
                 // On ajoute les coordonnées à la pièce
@@ -194,7 +194,7 @@ public class Partie implements Serializable{
                 // On place la pièce sur la grille grâce à ses coordonnées relatives
                 ArrayList<Carre> listeCarre = p.getListe();
                 for (Carre carre : listeCarre) { 
-                    this.grille[x + carre.getX()][y + carre.getY()] = p.getId();
+                    this.grille[y + carre.getY()][x + carre.getX()] = p.getId();
                 }
             }
         }
@@ -218,7 +218,7 @@ public class Partie implements Serializable{
         // On place des . aux emplacements de la pièce
         ArrayList<Carre> listeCarre = p.getListe();
         for (Carre carre : listeCarre) { 
-            this.grille[x + carre.getX()][y + carre.getY()] = '*';
+            this.grille[y + carre.getY()][x + carre.getX()] = '.';
         }
 
 
