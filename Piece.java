@@ -48,34 +48,6 @@ public abstract class Piece implements Serializable{
      * méthode qui lit un fichier stockant une pièce
      * @throws IOException 
      */
-	// public void lireFichier() throws IOException{
-	// 	BufferedReader br = new BufferedReader(new FileReader(this.nomFichier));
-	// 	String ligne = br.readLine();
-	// 	char carre;
-	// 	int haut=0;
-    //     int larg=0;
-	// 	while(ligne!=null){
-    //         // on récupère la largeur de la ligne si elle est plus grande que celle stockée
-    //         if (larg < ligne.length()) {
-    //             larg = ligne.length();
-    //         }
-
-    //         // si le caractère correspond à un # dans le fichier, ajoute un carre aux coordonnées
-	// 		for(int i=0;i<ligne.length();i++){
-	// 			carre=ligne.charAt(i);
-	// 			if(carre=='#'){
-	// 				this.liste.add(new Carre(haut,i));
-	// 			}
-				
-	// 		}
-	// 		haut++;
-	// 		ligne=br.readLine();
-	// 	}
-
-    //     this.largeur = haut;
-    //     this.hauteur = larg;
-	// }
-	
     public void lireFichier() throws IOException{
 		BufferedReader br = new BufferedReader(new FileReader(this.nomFichier));
 		String ligne = br.readLine();
