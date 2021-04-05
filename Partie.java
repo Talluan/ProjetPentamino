@@ -134,8 +134,6 @@ public class Partie implements Serializable{
                 hautMin = carre.getY();
         }
 
-        System.out.println(largMax + x);
-        System.out.println(hautMax + y);
         /* On vérifie si des carrés de la pièce dépassent d'un des bord,
             on retourne true */
         if(largMax + x >= Partie.largeur)
