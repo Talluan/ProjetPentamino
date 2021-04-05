@@ -134,13 +134,15 @@ public class Partie implements Serializable{
                 hautMin = carre.getY();
         }
 
+        System.out.println(largMax + x);
+        System.out.println(hautMax + y);
         /* On vérifie si des carrés de la pièce dépassent d'un des bord,
             on retourne true */
-        if(largMax + x > Partie.largeur)
+        if(largMax + x >= Partie.largeur)
             return true;
         if(largMin + x < 0)
             return true;
-        if(hautMax + y > Partie.hauteur)
+        if(hautMax + y >= Partie.hauteur)
             return true;
         if(hautMin + y < 0)
             return true;
@@ -174,28 +176,69 @@ public class Partie implements Serializable{
      */
     public void ajouterPiece(Piece p, int x, int y) throws CaseDejaRemplieException, PieceDebordeException {
 
-        try {
-            if (debordeGrille(p, x, y)) {
-                throw new PieceDebordeException("La piece deborde de la grille de jeu");
-            }
-            else if(pieceSuperposee(p,x,y)) {
-                throw new CaseDejaRemplieException("Deux carres se superposent");
-            }
-        } finally {
-            // On vérifie que la pièce est bien dans la liste d'éléments à poser
-            int place = this.piaPosees.indexOf(p);
-            if (place != -1) {
-                this.piaPosees.remove(place);
-                this.piPosees.add(p);
+        // On vérifie si la pièce va déborder ou si elle va être superposée
+        if(pieceSuperposee(p,x,y)) {
+            throw new CaseDejaRemplieException("Deux carres se superposent");
+        }
+        if (debordeGrille(p, x, y)) {
+            System.out.println("ca throw PieceDeborde");
+            throw new PieceDebordeException("La piece deborde de la grille de jeu");
+        }
+        // On vérifie que la pièce est bien dans la liste d'éléments à poser
+        int place = this.piaPosees.indexOf(p);
+        if (place != -1) {
+            this.piaPosees.remove(place);
+            this.piPosees.add(p);
 
-                // On ajoute les coordonnées à la pièce
-                p.setXY(x, y);
+            // On ajoute les coordonnées à la pièce
+            p.setXY(x, y);
 
-                // On place la pièce sur la grille grâce à ses coordonnées relatives
-                ArrayList<Carre> listeCarre = p.getListe();
-                for (Carre carre : listeCarre) { 
-                    this.grille[y + carre.getY()][x + carre.getX()] = p.getId();
-                }
+            // On place la pièce sur la grille grâce à ses coordonnées relatives
+            ArrayList<Carre> listeCarre = p.getListe();
+            for (Carre carre : listeCarre) { 
+                this.grille[y + carre.getY()][x + carre.getX()] = p.getId();
+            }
+        }
+        
+    }
+
+    public void forcerPlacementDebutant(Piece p, int x, int y) {
+        // On prend les carres qui rentrent bien dans la grille
+        ArrayList<Carre> listeCarres = p.CarresPlacable(x, y);
+
+        // On les place
+
+        int place = this.piaPosees.indexOf(p);
+        if (place != -1) {
+            this.piaPosees.remove(place);
+            this.piPosees.add(p);
+
+            // On ajoute les coordonnées à la pièce
+            p.setXY(x, y);
+
+            // On place la pièce sur la grille grâce à ses coordonnées relatives, sans mettre celles qui dépassent
+            for (Carre carre : listeCarres) { 
+                this.grille[y + carre.getY()][x + carre.getX()] = p.getId();
+            }
+        }
+    }
+
+    public void forcerPlacementIntermediaire(Piece p, int x, int y) {
+        // On prend les carres qui ne 
+        ArrayList<Carre> listeCarres = p.CarresNonSuperposes(x, y);
+
+        // On les place
+        int place = this.piaPosees.indexOf(p);
+        if (place != -1) {
+            this.piaPosees.remove(place);
+            this.piPosees.add(p);
+
+            // On ajoute les coordonnées à la pièce
+            p.setXY(x, y);
+
+            // On place la pièce sur la grille grâce à ses coordonnées relatives, sans mettre celles qui dépassent
+            for (Carre carre : listeCarres) { 
+                this.grille[y + carre.getY()][x + carre.getX()] = p.getId();
             }
         }
     }
@@ -218,14 +261,18 @@ public class Partie implements Serializable{
         // On place des . aux emplacements de la pièce
         ArrayList<Carre> listeCarre = p.getListe();
         for (Carre carre : listeCarre) { 
-            this.grille[y + carre.getY()][x + carre.getX()] = '.';
+            if (carre.getX() + x < Partie.largeur && carre.getY() + y < Partie.hauteur) {
+                this.grille[y + carre.getY()][x + carre.getX()] = '.';
+            }
         }
 
         // On redessine toutes les pièces sur la grille
         for(Piece pi : Jeu.game.piPosees){
             listeCarre = pi.getListe();
             for(Carre c : listeCarre){
+                if (c.getX() + x < Partie.largeur && c.getY() + y < Partie.hauteur) {
                 this.grille[pi.getY() + c.getY()][pi.getX() + c.getX()] = pi.getId();
+                }
             }
         }
 
@@ -236,7 +283,7 @@ public class Partie implements Serializable{
      */
     public void afficherListePiece() {
         for (int i = 0; i < this.piaPosees.size(); i++) {
-            System.out.println("piece " + i + 1 + " :" );
+            System.out.println("piece " + i + " :" );
             this.piaPosees.get(i).afficherPiece();
         }
     }
@@ -294,6 +341,14 @@ public class Partie implements Serializable{
      */
     public void setScore(double sc){
         this.score=sc;
+    }
+
+    /**
+     * méthode qui retourne la grille de jeu
+     * @return grille de jeu
+     */
+    public char[][] getGrille() {
+        return this.grille;
     }
 
 }

@@ -12,27 +12,7 @@ public abstract class Joueur implements Serializable {
         this.liste = new ArrayList<Partie>();
     }
 
-    public boolean poserPiece(Piece piece) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Ou voulez vous placer la piece ?");
-        System.out.print("En X ? : ");
-        int x = sc.nextInt();
-        System.out.print("En Y ? : ");
-        int y = sc.nextInt();
-        try {
-            Jeu.game.ajouterPiece(piece, x, y);
-        } catch (CaseDejaRemplieException e) { // le type de l'exeption va changer là c'est si les pièces se superposent
-            Jeu.game.retirerDernierePiece();
-            System.out.println("Les pieces se superposent !"); 
-            return false;
-        } catch (PieceDebordeException e) {
-            Jeu.game.retirerDernierePiece();
-            System.out.println("La piece sort de la grille !");
-            return false;
-        }
-        return true;
-        
-    }
+    public abstract boolean poserPiece(Piece piece);
 
     public void afficherParties() {
         for (int i = 0; i < this.liste.size(); i++) {

@@ -151,7 +151,41 @@ public abstract class Piece implements Serializable{
         System.out.println(chaine);
     }
 
-	
+    /**
+     * méthode qui retourne la liste de carrés d'une pièce ne dépassant pas de la grille de jeu et n'étant pas superposés
+     * @param x position en abscisse de la pièce
+     * @param y position en ordonnée de la pièce
+     * @return  liste des carrés à placer
+     */
+	public ArrayList<Carre> CarresPlacable( int x, int y) {
+        ArrayList<Carre> res = this.CarresNonSuperposes(x, y);
+        for (Carre carre : this.liste) {
+            if (carre.getX() + x < Partie.largeur && carre.getY() + y < Partie.hauteur) {
+                res.add(carre);
+            }
+        }
+        return res;
+    }
+
+    /**
+     * méthode qui retourne la liste de carrés placable, ils ne sont pas superposés à une autre pièce
+     * @param x position en abscisse de la pièce
+     * @param y position en ordonnée de la pièce
+     * @return  liste des carrés à placer
+     */
+	public ArrayList<Carre> CarresNonSuperposes( int x, int y) {
+        ArrayList<Carre> res = new ArrayList<Carre>();
+        for (Carre carre : this.liste) {
+            if (carre.getX() + x < Partie.largeur && carre.getY() + y < Partie.hauteur) {
+                if(Jeu.game.getGrille()[carre.getY() + y][carre.getX() + x] == '.') {
+                    res.add(carre);
+                }
+            }
+        }
+        return res;
+    }
+
+
 	/**
      * méthode qui initialise la position horizontale d'une pièce
      * @param nx position horizontale
