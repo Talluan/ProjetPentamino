@@ -1,13 +1,24 @@
 import java.io.*;
 import java.util.Scanner;
 
-
+/**
+ * Classe Intermediaire, hérite de joueur et correspond au niveau de jeu moyen
+ */
 public class Intermediaire extends Joueur implements Serializable{
 
+    /**
+     * Constructeur de Intermediaire
+     * @param nom nom du joueur
+     */
     public Intermediaire(String nom){
         super(nom);
     }
 
+    /**
+     * Méthode qui permet de poser une pièce sur la grille
+     * @param piece pièce à placer
+     * @return booléen qui indique si l'action a eu lieu ou non
+     */
     public boolean poserPiece(Piece piece) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Ou voulez vous placer la piece ?");
@@ -29,6 +40,10 @@ public class Intermediaire extends Joueur implements Serializable{
         
     }
 
+    /**
+     * Méthode qui permet de calculer le score du joueur
+     * @return le score
+     */
     public double calculerScore(){
         Jeu.game.setScore(1.5*(Jeu.game).nbPiPosees());
         return Jeu.game.getScore();
