@@ -3,11 +3,28 @@ import java.io.*;
 
 public class Jeu{
 
+    /**
+     * Attributs
+     */
 
+    /**
+     * liste de joueurs
+     */
     public static ArrayList<Joueur> listeJoueur=new ArrayList<Joueur>();
+
+    /**
+     * Joueur courant
+     */
     public static Joueur joueurCharge;
+
+    /**
+     * Partie courante
+     */
     public static Partie game;
 
+    /**
+     * méthode qui permet de charger la liste de joueurs sauvegardée
+     */
     public static void chargerListeJoueur(){
         try{
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream("donnes.dat"));
@@ -26,6 +43,9 @@ public class Jeu{
         }
     }
 
+    /**
+     * méthode qui permet de sauvegarder le joueur courant dans la liste des joueurs
+     */
     public static void sauvegarder(){
         Jeu.joueurCharge.calculerScore();
         Jeu.joueurCharge.ajouterPartie(Jeu.game);
@@ -47,6 +67,9 @@ public class Jeu{
         }
     }
 
+    /**
+     * Comparateur par nom du joueur
+     */
     public static Comparator<Joueur> compareByName = new Comparator<Joueur>() {
         @Override
         public int compare(Joueur j1, Joueur j2) {
@@ -54,6 +77,9 @@ public class Jeu{
         }
     };
 
+    /**
+     * Comparateur par score du joueur
+     */
     public static Comparator<Joueur> compareByScore = new Comparator<Joueur>() {
         @Override
         public int compare(Joueur j1, Joueur j2) {
@@ -70,6 +96,9 @@ public class Jeu{
     };
 
 
+    /**
+     * méthode qui permet d'afficher la liste de joueurs par ordre alphabétique
+     */
     public static void afficherListeAlpha() {
         ArrayList<Joueur> listeAlpha = Jeu.listeJoueur;
         Collections.sort(listeAlpha, compareByName);
@@ -78,6 +107,9 @@ public class Jeu{
         }
     }
 
+    /**
+     * méthode qui permet d'afficher la liste de joueurs triée par score
+     */
     public static void afficherListeScore() {
         ArrayList<Joueur> listeScore = Jeu.listeJoueur;
         Collections.sort(listeScore, compareByScore);
@@ -86,6 +118,9 @@ public class Jeu{
         }
     }
 
+    /**
+     * méthode qui permet d'afficher le menu principal du jeu
+     */
     public static int affichageMenu() {
         System.out.println("0 : quitter le jeu");
         System.out.println("1 : creer un nouveau joueur");
@@ -97,6 +132,9 @@ public class Jeu{
         return choix;
     }
 
+    /**
+     * méthode qui permet de choisir un joueur parmi la liste existante
+     */
     public static Joueur choisirJoueur() {
         // cas où la liste de joueurs est vide
         if(Jeu.listeJoueur.size()==0){
@@ -123,6 +161,9 @@ public class Jeu{
         return Jeu.listeJoueur.get(choix);
     }
 
+    /**
+     * méthode qui permet de créer un nouveau joueur
+     */
     public static void creerJoueur(){
         Scanner sc = new Scanner(System.in);
         int difficulte;
@@ -180,6 +221,9 @@ public class Jeu{
         }
     }
 
+    /**
+     * méthode qui permet de choisir une partie dans la liste du joueur chargé
+     */
     public static void choisirPartie() {
         if(Jeu.joueurCharge.getListe().size()==0){
             System.out.println("Pas de partie! Redirection vers la creation de partie");
@@ -195,6 +239,9 @@ public class Jeu{
         Jeu.joueurCharge.getListe().remove(choix);
     }
 
+    /**
+     * méthode qui permet de créer une nouvelle partie
+     */
     public static void creerPartie() {
         // On ajoute une partie à la liste de parties du joueur
         Jeu.joueurCharge.getListe().add(new Partie());
@@ -202,6 +249,9 @@ public class Jeu{
         Jeu.game =(Partie) Jeu.joueurCharge.getListe().get(Jeu.joueurCharge.getListe().size()-1);
     }
 
+    /**
+     * méthode qui permet de jouer une partie
+     */
     public static void startGame() {
         if (Jeu.joueurCharge != null && Jeu.game != null) {
             boolean sortie = false;
@@ -233,6 +283,10 @@ public class Jeu{
         return;
     }
 
+    /**
+     * méthode qui permet l'affichage du menu des parties
+     * @return un entier correspondant au choix du joueur
+     */
     public static int menuParties() {
         System.out.println("0 : retourner au menu");
         System.out.println("1 : creer partie");
@@ -248,6 +302,10 @@ public class Jeu{
         return choix;
     }
 
+    /**
+     * méthode principale du jeu, permet les différents affichages, et le chargement des fichiers de sauvegarde
+     * @param args
+     */
     public static void main(String[] args){
         boolean session = true;
         chargerListeJoueur();
