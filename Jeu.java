@@ -243,10 +243,8 @@ public class Jeu{
      * méthode qui permet de créer une nouvelle partie
      */
     public static void creerPartie() {
-        // On ajoute une partie à la liste de parties du joueur
-        Jeu.joueurCharge.getListe().add(new Partie());
-        // On place la partie créée dans la partie courante pour la jouer
-        Jeu.game =(Partie) Jeu.joueurCharge.getListe().get(Jeu.joueurCharge.getListe().size()-1);
+        //on créé une nouvelle partie et on la met dans Jeu.game
+        Jeu.game =new Partie();
     }
 
     /**
@@ -349,7 +347,6 @@ public class Jeu{
             }
         }
 
-        Jeu.sauvegarder();
         System.exit(0);
 
     }
