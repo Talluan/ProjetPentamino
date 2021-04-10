@@ -47,7 +47,7 @@ public class Partie implements Serializable{
 
         this.grille = new char [Partie.largeur][Partie.hauteur];
         this.remplirGrille(); // On remplit la grille de .
-        this.piaPosees = this.listePieceAlea(5); // Nombre de pièces pourrait dépendre d'une variable joueur static dans jeu
+        this.piaPosees = this.listePieceAlea(3); 
         this.piPosees = new ArrayList<Piece>();
     }
 
