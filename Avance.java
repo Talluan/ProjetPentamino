@@ -20,12 +20,11 @@ public class Avance extends Joueur implements Serializable{
      * @return booléen qui indique si l'action a eu lieu ou non
      */
     public boolean poserPiece(Piece piece) {
-        Scanner sc = new Scanner(System.in);
         System.out.println("Ou voulez vous placer la piece ?");
         System.out.print("En X ? : ");
-        int x = sc.nextInt();
+        int x = Jeu.nextInt();
         System.out.print("En Y ? : ");
-        int y = sc.nextInt();
+        int y = Jeu.nextInt();
         try {
             Jeu.game.ajouterPiece(piece, x, y);
         } catch (CaseDejaRemplieException e) { // le type de l'exeption va changer là c'est si les pièces se superposent

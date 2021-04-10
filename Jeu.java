@@ -22,6 +22,26 @@ public class Jeu{
      */
     public static Partie game;
 
+
+    /**
+     * méthode qui permet de scanner un entier
+     */
+    public static int nextInt() {
+        boolean type = false;
+        int n = 0;
+        while (!type) {
+            try {
+                Scanner sc = new Scanner(System.in);
+                n = sc.nextInt();
+                type = true;
+            } catch (InputMismatchException e) {
+                System.out.println("Donnez un entier !");
+            }
+        }
+        return n;
+    }
+
+
     /**
      * méthode qui permet de charger la liste de joueurs sauvegardée
      */
@@ -126,9 +146,7 @@ public class Jeu{
         System.out.println("1 : creer un nouveau joueur");
         System.out.println("2 : choisir un joueur");
         System.out.print("Que voulez vous faire ?  ");
-        Scanner sc = new Scanner(System.in);
-        int choix = sc.nextInt();
-        System.out.println();
+        int choix = Jeu.nextInt();
         return choix;
     }
 
@@ -150,12 +168,11 @@ public class Jeu{
         Jeu.afficherListeScore();
         
         // réception du résultat
-        Scanner sc = new Scanner(System.in);
         System.out.print("Votre choix : ");
-        int choix = sc.nextInt();
+        int choix = Jeu.nextInt();
         while (choix < 0 || choix > Jeu.listeJoueur.size()) {
             System.out.print("Votre choix : ");
-            choix = sc.nextInt();
+            choix = Jeu.nextInt();
         }
         System.out.println();
         return Jeu.listeJoueur.get(choix);
@@ -194,10 +211,10 @@ public class Jeu{
             validation = sc.nextLine();
             if(validation.equals("oui")){
                 System.out.println("Choisissez une difficulte (1 : Debutant, 2 : Intermediaire, 3 : Avance) :");
-                difficulte = sc.nextInt();
+                difficulte = Jeu.nextInt();
                 while(difficulte<1 && difficulte>3){
                     System.out.println("Mauvais chiffre! (tapez un nombre entre 1 et 3) :");
-                    difficulte = sc.nextInt();
+                    difficulte = Jeu.nextInt();
                 }
                 switch(difficulte){
                     case 1:
@@ -230,10 +247,9 @@ public class Jeu{
             Jeu.creerPartie();
         }
         Jeu.joueurCharge.afficherParties();
-        Scanner sc = new Scanner(System.in);
-        int choix = sc.nextInt();
+        int choix = Jeu.nextInt();
         while (choix < 0 || choix > Jeu.joueurCharge.getListe().size()) {
-            choix = sc.nextInt();
+            choix = Jeu.nextInt();
         }
         Jeu.game = (Partie)Jeu.joueurCharge.getListe().get(choix);
         Jeu.joueurCharge.getListe().remove(choix);
@@ -243,8 +259,7 @@ public class Jeu{
      * méthode qui permet de créer une nouvelle partie
      */
     public static void creerPartie() {
-        //on créé une nouvelle partie et on la met dans Jeu.game
-        Jeu.game =new Partie();
+        Jeu.game = new Partie();
     }
 
     /**
@@ -258,9 +273,8 @@ public class Jeu{
                 System.out.println();
                 Jeu.game.afficherListePiece();
                 System.out.println("Quelle piece voulez vous jouer ? Tapez -1 pour quitter la partie ou -2 pour enlever la derniere piece.");
-                Scanner sc = new Scanner(System.in);
                 System.out.print("Votre choix : ");
-                int choix = sc.nextInt();
+                int choix = Jeu.nextInt();
                 System.out.println();
 
                 Piece p = null;
@@ -294,12 +308,11 @@ public class Jeu{
         System.out.println("0 : retourner au menu");
         System.out.println("1 : creer partie");
         System.out.println("2 : choisir partie");
-        Scanner sc = new Scanner(System.in);
         System.out.print("Votre choix : ");
-        int choix = sc.nextInt();
+        int choix = Jeu.nextInt();
         while (choix < 0 || choix > 2) {
             System.out.print("Votre choix : ");
-            choix = sc.nextInt();
+            choix = Jeu.nextInt();
         }
         System.out.println();
         return choix;
@@ -346,7 +359,6 @@ public class Jeu{
                 session = false;
             }
         }
-
         System.exit(0);
 
     }
