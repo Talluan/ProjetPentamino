@@ -318,6 +318,13 @@ public class Partie implements Serializable{
         }
 
     }
+
+    /**
+     * méthode qui supprime la dernière pièce de la liste à poser
+     */
+    public void supprimerDernierePieceAPoser() {
+        this.piaPosees.remove(this.piaPosees.size()-1);
+    }
     
     /**
      * méthode qui affiche la liste des pièces à poser
@@ -368,6 +375,7 @@ public class Partie implements Serializable{
     public ArrayList<Piece> getPiaPosees() {
         return this.piaPosees;
     }
+
     /**
      * méthode qui retourne le score actuel de la partie
      * @return un double le score de la partie

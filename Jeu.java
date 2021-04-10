@@ -259,7 +259,7 @@ public class Jeu{
                 Jeu.game.afficherGrille();
                 System.out.println();
                 Jeu.game.afficherListePiece();
-                System.out.println("Quelle piece voulez vous jouer ? Tapez -1 pour quitter la partie.");
+                System.out.println("Quelle piece voulez vous jouer ? Tapez -1 pour quitter la partie ou -2 pour enlever la dernière pièce.");
                 Scanner sc = new Scanner(System.in);
                 System.out.print("Votre choix : ");
                 int choix = sc.nextInt();
@@ -268,11 +268,16 @@ public class Jeu{
                 Piece p = null;
 
                 // On sort de la partie si l'utilisateur tape -1
-                while (choix < -1 || choix > Jeu.game.getPiaPosees().size()) {
-                    System.out.println("Tapez un numero existant ! -1 pour quitter.");
+                // On enlève la dernière pièce si il tape -2
+                while (choix < -2 || choix > Jeu.game.getPiaPosees().size()) {
+                    System.out.println("Tapez un numero existant ! -1 pour quitter. -2 pour enlever la derniere piece posee.");
                 }
                 if (choix == -1) {
                     sortie = true;
+                }
+                if (choix == -2) {
+                    Jeu.game.supprimerDernierePieceAPoser();
+                    Jeu.game.retirerDernierePiece();
                 }
                 else {
                     p = Jeu.game.getPiaPosees().get(choix);
