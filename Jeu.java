@@ -138,7 +138,7 @@ public class Jeu{
     public static Joueur choisirJoueur() {
         // cas où la liste de joueurs est vide
         if(Jeu.listeJoueur.size()==0){
-            System.out.println("Pas de joueur! Redirection vers la creation de joueur");
+            System.out.println("Pas de joueur! Redirection vers la creation de joueur\n");
             Jeu.creerJoueur();
         }
         System.out.println("Quel joueur desirez vous jouer ?");
@@ -274,6 +274,7 @@ public class Jeu{
                 }
                 if (choix == -1) {
                     sortie = true;
+                    Jeu.sauvegarder();
                 }
                 if (choix == -2) {
                     Jeu.game.supprimerDernierePieceAPoser();
@@ -285,7 +286,6 @@ public class Jeu{
                 }
             }
         }
-        return;
     }
 
     /**
@@ -340,6 +340,7 @@ public class Jeu{
                     Jeu.choisirPartie();
 
                 Jeu.startGame();
+                Jeu.chargerListeJoueur();
             } 
 
             // cas de sortie du jeu
