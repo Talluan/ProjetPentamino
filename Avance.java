@@ -35,6 +35,8 @@ public class Avance extends Joueur implements Serializable{
             System.out.println("La piece sort de la grille, vous ne pouvez pas la placer ici !");
             return false;
         }
+        // On rajoute une pièce aléatoire dans les pièces à poser
+        Jeu.game.addPieceAlea(1);
         return true;
     }
 

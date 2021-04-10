@@ -36,6 +36,8 @@ public class Intermediaire extends Joueur implements Serializable{
             // On force tout de même le placement
             Jeu.game.forcerPlacementIntermediaire(piece, x, y);
         }
+        // On rajoute une pièce aléatoire dans les pièces à poser
+        Jeu.game.addPieceAlea(1);
         return true;
         
     }

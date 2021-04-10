@@ -64,6 +64,49 @@ public class Partie implements Serializable{
     }
 
     /**
+     * méthode qui ajoute une pièce à poser dans la liste
+     * @param n nombre de pièces à ajouter
+     */
+    public void addPieceAlea(int n) {
+        for (int i = 0; i < n; i++) {
+            int nbAlea = (int) (Math.random()*10);
+            switch (nbAlea) {
+                case 0:
+                    this.piaPosees.add(new C(0, 0));
+                    break;
+                case 1:
+                    this.piaPosees.add(new L(0, 0));
+                    break;
+                case 2:
+                    this.piaPosees.add(new T(0, 0));
+                    break;
+                case 3:
+                    this.piaPosees.add(new I(0, 0));
+                    break;
+                case 4:
+                    this.piaPosees.add(new P(0, 0));
+                    break;
+                case 5:
+                    this.piaPosees.add(new Q(0, 0));
+                    break;
+                case 6:
+                    this.piaPosees.add(new S(0, 0));
+                    break;
+                case 7:
+                    this.piaPosees.add(new X(0, 0));
+                    break;
+                case 8:
+                    this.piaPosees.add(new Z(0, 0));
+                    break;
+                default:
+                    this.piaPosees.add(new U(0, 0));
+                    break;
+            }
+        }
+    }
+
+
+    /**
      * méthode qui retourne une liste de pièce aléatoire
      * @param taille nombre de pièce que l'on veut dans notre liste
      * @return la liste de pièce

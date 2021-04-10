@@ -38,6 +38,8 @@ public class Debutant extends Joueur implements Serializable{
             Jeu.game.forcerPlacementDebutant(piece, x, y);
 
         }
+        // On rajoute une pièce aléatoire dans les pièces à poser
+        Jeu.game.addPieceAlea(1);
         return true;
     }
 
