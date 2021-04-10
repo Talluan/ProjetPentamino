@@ -259,7 +259,7 @@ public class Jeu{
                 Jeu.game.afficherGrille();
                 System.out.println();
                 Jeu.game.afficherListePiece();
-                System.out.println("Quelle piece voulez vous jouer ? Tapez -1 pour quitter la partie ou -2 pour enlever la dernière pièce.");
+                System.out.println("Quelle piece voulez vous jouer ? Tapez -1 pour quitter la partie ou -2 pour enlever la derniere piece.");
                 Scanner sc = new Scanner(System.in);
                 System.out.print("Votre choix : ");
                 int choix = sc.nextInt();
@@ -276,7 +276,7 @@ public class Jeu{
                     sortie = true;
                     Jeu.sauvegarder();
                 }
-                if (choix == -2) {
+                else if (choix == -2) {
                     Jeu.game.supprimerDernierePieceAPoser();
                     Jeu.game.retirerDernierePiece();
                 }
