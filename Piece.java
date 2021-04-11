@@ -3,7 +3,7 @@ import java.io.*;
 public abstract class Piece implements Serializable{
 
 	/** 
-     * Les coordonées de la pièce 
+     * Les coordonnées de la pièce 
      */
 	private int x,y;
 
@@ -13,7 +13,7 @@ public abstract class Piece implements Serializable{
 	private char id;
 
 	/** 
-     * la liste de carré d'une pièce 
+     * la liste de carrés d'une pièce 
      * */
 	private ArrayList<Carre> liste;
 
@@ -75,28 +75,6 @@ public abstract class Piece implements Serializable{
         this.largeur = larg;
         this.hauteur = haut;
 	}
-    /**
-     * méthode qui indique si 2 pièces ont des formes similaires
-     * @return booléen qui indique si elles ont la même forme ou non
-     */
-    public boolean similaire(Piece p) {
-        if (this.liste.size() != p.liste.size()) {
-            return false;
-        }
-        for (Carre carre : liste) {
-            boolean jum = false;
-            for (Carre carre2 : p.liste) {
-                if (carre.getX() == carre2.getX() && carre.getY() == carre2.getY()) {
-                    jum = true;
-                }
-            }
-            if (!jum) {
-                return false;
-            }
-        }
-        return true;
-    }
-	
 
     /**
      * méthode qui vérifie si deux pièces ont des carrés superposés
@@ -114,14 +92,6 @@ public abstract class Piece implements Serializable{
         return false;
 	}
 
-    /**
-     * méthode qui indique si deux pièces ont la même origine
-     * @param p pièce à vérifier
-     * @return booléen qui dit si les pièces ont la même origine
-     */
-	public boolean memeOrigine(Piece p){
-		return (this.x==p.x) && (this.y==p.y);
-	}
 	
     /**
      * méthode qui affiche une pièce en entier
